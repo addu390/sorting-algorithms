@@ -1,5 +1,25 @@
 # Comparison of Sorting Algorithms 🚀
 
+## Installation
+
+- Install `virtualenv` [Instructions](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
+
+```
+python3 -m pip install --user --upgrade pip
+python3 -m pip --version
+python3 -m pip install --user virtualenv
+```
+
+- Create a virtual environment and install dependencies
+
+```
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
+## Usage
+
 To compare the time taken by the sorting algorithm(s), import the class in `plot_graph.py` and call the sorting algorithm and specify the input range.
 
 For example, comparing the in-memory and external merge sort, we have the following results:
