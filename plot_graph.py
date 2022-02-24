@@ -8,30 +8,17 @@ import merge_sort
 
 
 def plot_time(func, inputs, repeats, n_tests):
-    """
-    Run timer and plot time complexity of `func` using the iterable `inputs`.
-
-    Run the function `n_tests` times per `repeats`.
-    """
-    x, y, yerr = [], [], []
+    x, y, y_err = [], [], []
     for i in inputs:
         timer = timeit.Timer(partial(func, i))
         t = timer.repeat(repeat=repeats, number=n_tests)
         x.append(i)
         y.append(np.mean(t))
-        yerr.append(np.std(t) / np.sqrt(len(t)))
-    pyplot.errorbar(x, y, yerr=yerr, fmt='-o', label=func.__name__)
+        y_err.append(np.std(t) / np.sqrt(len(t)))
+    pyplot.errorbar(x, y, yerr=y_err, fmt='-o', label=func.__name__)
 
 
 def plot_times(functions, inputs, repeats=3, n_tests=1, file_name=""):
-    """
-    Run timer and plot time complexity of all `functions`,
-    using the iterable `inputs`.
-
-    Run the functions `n_tests` times per `repeats`.
-
-    Adds a legend containing the labels added by `plot_time`.
-    """
     for func in functions:
         plot_time(func, inputs, repeats, n_tests)
     pyplot.legend()
