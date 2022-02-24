@@ -83,12 +83,12 @@ class ExternalMergeSort:
                 size += 1
                 if size % chunk_size == 0 and len(sorted_chunk) != 0:
                     sorted_chunk = sorted(sorted_chunk, key=lambda no: int(no.strip()))
-                    self.test(sorted_chunk)
+                    self.save_chunk(sorted_chunk)
                     sorted_chunk = []
             if len(sorted_chunk) > 0:
-                self.test(sorted_chunk)
+                self.save_chunk(sorted_chunk)
 
-    def test(self, sorted_chunk):
+    def save_chunk(self, sorted_chunk):
         temp_file = tempfile.NamedTemporaryFile(dir=os.getcwd() + '/temp', delete=False)
         temp_file.writelines(sorted_chunk)
         temp_file.seek(0)
@@ -110,5 +110,5 @@ def with_random_numbers(input_size):
 
 
 if __name__ == "__main__":
-    with_random_numbers(100)
+    with_random_numbers(237494)
 
