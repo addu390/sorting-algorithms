@@ -26,12 +26,12 @@ For example, comparing the in-memory and external merge sort, we have the follow
 
 - For Powers of 2:
 
-<img src="./results/powers_of_2.png" width="60%">
+<img src="https://github.com/addu390/sorting_algorithms/blob/main/results/powers_of_2.png" width="60%">
 
 
 - For Powers of 10:
 
-<img src="./results/powers_of_10.png" width="60%">
+<img src="https://github.com/addu390/sorting_algorithms/blob/main/results/powers_of_10.png" width="60%">
 
 # External Merge Sort
 
@@ -156,4 +156,4 @@ The final output: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10` 😎
 
 Note: External Merge Sort algorithm is this code-base uses python's `sorted()` for sorting chucks; hence it can never be better than `sort()` or `sorted()`
 
-<img src="./results/tim_sort.png" width="60%">
+<img src="https://github.com/addu390/sorting_algorithms/blob/main/results/tim_sort.png" width="60%">
