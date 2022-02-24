@@ -113,7 +113,7 @@ Example:
 
 - Pick the min element `6` and append it to output file `1, 2, 3, 4, 5, 6`
 - Find the next element in the chunk file, which owns min element `6`
-- Number `3` from `Chunk 2` is smaller than `6`. Hence, replace it with `MAX_INTEGER`
+- When you see `EOF (End of Line)`, replace it with `MAX_INTEGER`
 
 ```
    MAX_INT                                 7
