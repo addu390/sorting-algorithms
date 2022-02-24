@@ -2,7 +2,7 @@
 
 ## Installation
 
-- Install `virtualenv` [Instructions](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
+- Install `virtualenv` ([Reference](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/))
 
 ```
 python3 -m pip install --user --upgrade pip
