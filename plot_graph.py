@@ -47,5 +47,6 @@ if __name__ == "__main__":
         input = generate_input.to_memory(input_size)
         input.sort()
 
+
     plot_times([external, in_memory, python_sort], [1024, 16384, 131072, 262144, 524288, 1048576, 2097152,
-                                                     4194304, 8388608], repeats=3, n_tests=1, file_name="output")
+                                                    4194304, 8388608], repeats=3, n_tests=1, file_name="output")
