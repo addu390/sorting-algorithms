@@ -91,7 +91,6 @@ def default(input_size):
     generate_input.to_file(input_size)
     ems = ExternalMergeSort()
     ems.split(generate_input.file_name, math.ceil(input_size/1000))
-    print(ems.merge_chunks())
     ems.clear()
 
 

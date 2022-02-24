@@ -39,7 +39,6 @@ def default(input_size):
     input = generate_input.to_memory(input_size)
     ms = MergeSort()
     ms.mergeSort(input)
-    print(input)
 
 
 if __name__ == "__main__":
