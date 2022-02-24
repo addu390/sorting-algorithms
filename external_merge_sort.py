@@ -86,11 +86,15 @@ class ExternalMergeSort:
             os.remove(f)
 
 
-def sample(input_size):
+def default(input_size):
     print("External Sort: " + str(input_size))
     generate_input.to_file(input_size)
     ems = ExternalMergeSort()
     ems.split(generate_input.file_name, math.ceil(input_size/1000))
-    ems.merge_chunks()
+    print(ems.merge_chunks())
     ems.clear()
+
+
+if __name__ == "__main__":
+    default(100)
 

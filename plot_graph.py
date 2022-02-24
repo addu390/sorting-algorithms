@@ -32,11 +32,11 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name=""):
 
 if __name__ == "__main__":
     def external(n):
-        external_merge_sort.sample(n)
+        external_merge_sort.default(n)
 
 
     def in_memory(n):
-        merge_sort.sample(n)
+        merge_sort.default(n)
 
 
     plot_times([in_memory, external], [262144, 524288, 1048576, 2097152, 4194304, 8388608], repeats=1)
