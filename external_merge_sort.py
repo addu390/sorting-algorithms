@@ -40,27 +40,27 @@ class ExternalMergeSort:
 
     def merge_chunks(self):
         heap = []
-        sorted_output = []
-        for chunk_file in self.chunk_files:
-            element = int(chunk_file.readline().strip())
-            heap.append(HeapNode(element, chunk_file))
+        with open("output.txt", 'w') as file_writer:
+            for chunk_file in self.chunk_files:
+                element = int(chunk_file.readline().strip())
+                heap.append(HeapNode(element, chunk_file))
 
-        self.construct_heap(heap)
+            self.construct_heap(heap)
 
-        while True:
-            top = heap[0]
-            if top.element == sys.maxsize:
-                break
-            sorted_output.append(top.element)
-            file_reader = top.chunk_file
-            element = file_reader.readline().strip()
-            if not element:
-                element = sys.maxsize
-            else:
-                element = int(element)
-            heap[0] = HeapNode(element, file_reader)
-            self.heapify(heap, 0, len(heap))
-        return sorted_output
+            while True:
+                top = heap[0]
+                if top.element == sys.maxsize:
+                    break
+                file_writer.write(str(top.element) + "\n")
+                file_reader = top.chunk_file
+                element = file_reader.readline().strip()
+                if not element:
+                    element = sys.maxsize
+                else:
+                    element = int(element)
+                heap[0] = HeapNode(element, file_reader)
+                self.heapify(heap, 0, len(heap))
+        file_writer.close()
 
     def split(self, file_name, chunk_size):
         with open(file_name, 'rb') as file_reader:
