@@ -15,6 +15,16 @@ class ExternalMergeSort:
     def __init__(self):
         self.chunk_files = []
 
+    def run(self, input_file_name, output_file_name, chunk_size=10000):
+        if os.path.exists('./temp'):
+            self.clear()
+        else:
+            os.mkdir('./temp')
+
+        self.split(input_file_name, chunk_size)
+        self.merge_chunks(output_file_name)
+        self.clear()
+
     def construct_heap(self, arr):
         length = len(arr)
         mid = length // 2
@@ -37,9 +47,9 @@ class ExternalMergeSort:
             (heap[i], heap[min_element]) = (heap[min_element], heap[i])
             self.heapify(heap, min_element, n)
 
-    def merge_chunks(self):
+    def merge_chunks(self, output_file_name):
         heap = []
-        with open("output.txt", 'w') as file_writer:
+        with open(output_file_name, 'w') as file_writer:
             for chunk_file in self.chunk_files:
                 element = int(chunk_file.readline().strip())
                 heap.append(HeapNode(element, chunk_file))
@@ -71,13 +81,18 @@ class ExternalMergeSort:
                     break
                 sorted_chunk.append(number)
                 size += 1
-                if size % chunk_size == 0:
+                if size % chunk_size == 0 and len(sorted_chunk) != 0:
                     sorted_chunk = sorted(sorted_chunk, key=lambda no: int(no.strip()))
-                    temp_file = tempfile.NamedTemporaryFile(dir=os.getcwd() + '/temp', delete=False)
-                    temp_file.writelines(sorted_chunk)
-                    temp_file.seek(0)
-                    self.chunk_files.append(temp_file)
-                    sorted_chunk.clear()
+                    self.test(sorted_chunk)
+                    sorted_chunk = []
+            if len(sorted_chunk) > 0:
+                self.test(sorted_chunk)
+
+    def test(self, sorted_chunk):
+        temp_file = tempfile.NamedTemporaryFile(dir=os.getcwd() + '/temp', delete=False)
+        temp_file.writelines(sorted_chunk)
+        temp_file.seek(0)
+        self.chunk_files.append(temp_file)
 
     def clear(self):
         files = glob.glob(os.getcwd() + '/temp/*')
@@ -86,11 +101,12 @@ class ExternalMergeSort:
 
 
 def with_random_numbers(input_size):
-    generate_input.to_file(input_size)
+    input_file_name = "unsorted.csv"
+    output_file_name = "sorted.csv"
+
+    generate_input.to_file(input_size, input_file_name)
     ems = ExternalMergeSort()
-    ems.split(generate_input.file_name, input_size if input_size < 10000 else 10000)
-    ems.merge_chunks()
-    ems.clear()
+    ems.run(input_file_name, output_file_name, input_size if input_size < 10000 else 10000)
 
 
 if __name__ == "__main__":

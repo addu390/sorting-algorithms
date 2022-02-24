@@ -1,8 +1,7 @@
 import random
 
 lower_limit = 0
-upper_limit = 1000
-file_name = "input.txt"
+upper_limit = 10000
 
 
 def to_memory(input_size):
@@ -13,7 +12,7 @@ def to_memory(input_size):
     return input_list
 
 
-def to_file(input_size):
+def to_file(input_size, file_name):
     with open(file_name, 'w') as file_writer:
         for i in range(int(input_size)):
             file_writer.write(str(random.randint(lower_limit, upper_limit)) + "\n")
