@@ -87,10 +87,10 @@ class ExternalMergeSort:
 
 
 def default(input_size):
-    print("External Sort: " + str(input_size))
     generate_input.to_file(input_size)
     ems = ExternalMergeSort()
-    ems.split(generate_input.file_name, math.ceil(input_size/1000))
+    ems.split(generate_input.file_name, input_size if input_size < 10000 else 10000)
+    ems.merge_chunks()
     ems.clear()
 
 

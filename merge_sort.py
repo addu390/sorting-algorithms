@@ -2,44 +2,41 @@ import generate_input
 
 
 class MergeSort:
-    def mergeSort(self, input_list):
-        if len(input_list) > 1:
-            mid = len(input_list) // 2
-            left = input_list[:mid]
-            right = input_list[mid:]
+    def sort(self, list):
+        list_length = len(list)
 
-            self.mergeSort(left)
-            self.mergeSort(right)
+        if list_length == 1:
+            return list
 
-            i = 0
-            j = 0
-            k = 0
-            while i < len(left) and j < len(right):
-                if left[i] <= right[j]:
-                    input_list[k] = left[i]
-                    i += 1
-                else:
-                    input_list[k] = right[j]
-                    j += 1
-                k += 1
+        mid_point = list_length // 2
 
-            while i < len(left):
-                input_list[k] = left[i]
+        left_partition = self.sort(list[:mid_point])
+        right_partition = self.sort(list[mid_point:])
+
+        return self.merge(left_partition, right_partition)
+
+    def merge(self, left, right):
+        output = []
+        i = j = 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                output.append(left[i])
                 i += 1
-                k += 1
-
-            while j < len(right):
-                input_list[k] = right[j]
+            else:
+                output.append(right[j])
                 j += 1
-                k += 1
+        output.extend(left[i:])
+        output.extend(right[j:])
+
+        return output
 
 
 def default(input_size):
-    print("Merge Sort: " + str(input_size))
     input = generate_input.to_memory(input_size)
     ms = MergeSort()
-    ms.mergeSort(input)
+    ms.sort(input)
 
 
 if __name__ == "__main__":
-    default(10)
+    default(100)

@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib import pyplot
 
 import external_merge_sort
+import generate_input
 import merge_sort
 
 
@@ -31,12 +32,20 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name=""):
 
 
 if __name__ == "__main__":
-    def external(n):
-        external_merge_sort.default(n)
+    def external(input_size):
+        print("External Sort: " + str(input_size))
+        external_merge_sort.default(input_size)
 
 
-    def in_memory(n):
-        merge_sort.default(n)
+    def in_memory(input_size):
+        print("Merge Sort: " + str(input_size))
+        merge_sort.default(input_size)
 
 
-    plot_times([in_memory, external], [262144, 524288, 1048576, 2097152, 4194304, 8388608], repeats=1)
+    def python_sort(input_size):
+        print("Python Sort: " + str(input_size))
+        input = generate_input.to_memory(input_size)
+        input.sort()
+
+    plot_times([external, in_memory, python_sort], [1024, 16384, 131072, 262144, 524288, 1048576, 2097152,
+                                                     4194304, 8388608], repeats=3, n_tests=1, file_name="output")
