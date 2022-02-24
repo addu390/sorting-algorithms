@@ -85,7 +85,7 @@ class ExternalMergeSort:
             os.remove(f)
 
 
-def default(input_size):
+def with_random_numbers(input_size):
     generate_input.to_file(input_size)
     ems = ExternalMergeSort()
     ems.split(generate_input.file_name, input_size if input_size < 10000 else 10000)
@@ -94,5 +94,5 @@ def default(input_size):
 
 
 if __name__ == "__main__":
-    default(100)
+    with_random_numbers(100)
 

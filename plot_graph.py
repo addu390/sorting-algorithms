@@ -5,7 +5,7 @@ from matplotlib import pyplot
 
 import external_merge_sort
 import generate_input
-import merge_sort
+import in_memory_merge_sort
 
 
 def plot_time(func, inputs, repeats, n_tests):
@@ -34,12 +34,12 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name=""):
 if __name__ == "__main__":
     def external(input_size):
         print("External Sort: " + str(input_size))
-        external_merge_sort.default(input_size)
+        external_merge_sort.with_random_numbers(input_size)
 
 
     def in_memory(input_size):
         print("Merge Sort: " + str(input_size))
-        merge_sort.default(input_size)
+        in_memory_merge_sort.with_random_numbers(input_size)
 
 
     def python_sort(input_size):
