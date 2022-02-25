@@ -1,7 +1,7 @@
 import random
 
 lower_limit = 0
-upper_limit = 10000
+upper_limit = 1000
 
 
 def to_memory(input_size):

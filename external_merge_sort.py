@@ -100,15 +100,15 @@ class ExternalMergeSort:
             os.remove(f)
 
 
-def with_random_numbers(input_size):
+def with_random_numbers(input_size, chunk_size):
     input_file_name = "unsorted.csv"
     output_file_name = "sorted.csv"
 
     generate_input.to_file(input_size, input_file_name)
     ems = ExternalMergeSort()
-    ems.run(input_file_name, output_file_name, input_size if input_size < 10000 else 10000)
+    ems.run(input_file_name, output_file_name, chunk_size if input_size > chunk_size else input_size)
 
 
 if __name__ == "__main__":
-    with_random_numbers(237494)
+    with_random_numbers(100, 10)
 

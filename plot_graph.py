@@ -34,7 +34,7 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name=""):
 if __name__ == "__main__":
     def external(input_size):
         print("External Sort: " + str(input_size))
-        external_merge_sort.with_random_numbers(input_size)
+        external_merge_sort.with_random_numbers(input_size, 10000)
 
 
     def in_memory(input_size):
