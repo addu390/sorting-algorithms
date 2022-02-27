@@ -2,7 +2,9 @@ import os
 import sys
 import tempfile
 import glob
-import generate_input
+import file_util
+
+output_file_name = "sorted.csv"
 
 
 class HeapNode:
@@ -87,6 +89,7 @@ class ExternalMergeSort:
                     sorted_chunk = []
             if len(sorted_chunk) > 0:
                 self.save_chunk(sorted_chunk)
+        file_reader.close()
 
     def save_chunk(self, sorted_chunk):
         temp_file = tempfile.NamedTemporaryFile(dir=os.getcwd() + '/temp', delete=False)
@@ -100,15 +103,18 @@ class ExternalMergeSort:
             os.remove(f)
 
 
-def with_random_numbers(input_size, chunk_size, input_range):
+def _random(input_size, chunk_size, input_range):
     input_file_name = "unsorted.csv"
-    output_file_name = "sorted.csv"
-
-    generate_input.to_file(input_size, input_range, input_file_name)
+    file_util.to_file(input_size, input_range, input_file_name)
     ems = ExternalMergeSort()
     ems.run(input_file_name, output_file_name, chunk_size if input_size > chunk_size else input_size)
 
 
+def sort_from_file(file_name, input_size, chunk_size):
+    ems = ExternalMergeSort()
+    ems.run(file_name, output_file_name, chunk_size if input_size > chunk_size else input_size)
+
+
 if __name__ == "__main__":
-    with_random_numbers(100, 10, (0, 10000))
+    _random(100, 10, (0, 10000))
 

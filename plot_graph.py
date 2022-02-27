@@ -3,8 +3,8 @@ import timeit
 import numpy as np
 from matplotlib import pyplot
 
-import external_merge_sort
-import generate_input
+import external_sort
+import file_util
 import in_memory_merge_sort
 from time import time
 
@@ -33,21 +33,33 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name_prefix=""):
 
 
 if __name__ == "__main__":
+    input_file_name = "unsorted.csv"
+
+    def generate(input_size, input_range):
+        file_util.to_file(input_size, input_range, input_file_name)
+        return input_size
+
+
     def external(input_size):
         print("External Sort: " + str(input_size))
-        external_merge_sort.with_random_numbers(input_size, chunk_size=10000, input_range=(0, 1000000))
+        external_sort.sort_from_file(input_file_name, input_size, chunk_size=100000)
 
 
     def in_memory(input_size):
         print("Merge Sort: " + str(input_size))
-        in_memory_merge_sort.with_random_numbers(input_size, input_range=(0, 1000000))
+        in_memory_merge_sort.sort_from_file(input_file_name, input_size)
 
 
     def python_sort(input_size):
         print("Python Sort: " + str(input_size))
-        input = generate_input.to_memory(input_size, input_range=(0, 1000000))
-        input.sort()
+        input = file_util.from_file(input_file_name)
+        print(len(input))
+        sorted(input)
 
-
-    plot_times([python_sort, external, in_memory], [1024, 16384, 131072, 262144, 524288, 1048576, 2097152,
-                                                    4194304, 8388608], repeats=3, n_tests=1, file_name_prefix="output-")
+    plot_times([python_sort, external, in_memory],
+               [generate(131072, input_range=(0, 1000000)),
+                generate(262144, input_range=(0, 1000000)),
+                generate(524288, input_range=(0, 1000000)),
+                generate(1048576, input_range=(0, 10000000)),
+                generate(4194304, input_range=(0, 10000000))],
+               repeats=3, n_tests=1, file_name_prefix="output-")

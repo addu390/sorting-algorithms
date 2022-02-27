@@ -1,4 +1,4 @@
-import generate_input
+import file_util
 
 
 class MergeSort:
@@ -32,11 +32,18 @@ class MergeSort:
         return output
 
 
-def with_random_numbers(input_size, input_range):
-    input = generate_input.to_memory(input_size, input_range)
+def _random(input_size, input_range):
+    input = file_util.to_memory(input_size, input_range)
+    ms = MergeSort()
+    ms.sort(input)
+
+
+def sort_from_file(file_name, input_size):
+    input = file_util.from_file(file_name)
+    print(len(input))
     ms = MergeSort()
     ms.sort(input)
 
 
 if __name__ == "__main__":
-    with_random_numbers(100, (0, 10000))
+    _random(100, (0, 10000))
