@@ -23,6 +23,6 @@ def from_file(file_name):
         for number in file_reader:
             if not number:
                 break
-            input_list.append(number)
+            input_list.append(int(number))
     file_reader.close()
     return input_list

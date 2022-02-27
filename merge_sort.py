@@ -40,7 +40,6 @@ def _random(input_size, input_range):
 
 def sort_from_file(file_name, input_size):
     input = file_util.from_file(file_name)
-    print(len(input))
     ms = MergeSort()
     ms.sort(input)
 
