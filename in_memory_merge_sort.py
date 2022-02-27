@@ -32,11 +32,16 @@ class MergeSort:
         return output
 
 
-def with_random_numbers(input_size, input_range):
+def generate_and_sort(input_size, input_range):
     input = generate_input.to_memory(input_size, input_range)
     ms = MergeSort()
     ms.sort(input)
 
 
+def list_sort(input_list):
+    ms = MergeSort()
+    ms.sort(input_list)
+
+
 if __name__ == "__main__":
-    with_random_numbers(100, (0, 10000))
+    generate_and_sort(100, (0, 10000))

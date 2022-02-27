@@ -14,7 +14,7 @@ def plot_time(func, inputs, repeats, n_tests):
     for i in inputs:
         timer = timeit.Timer(partial(func, i))
         t = timer.repeat(repeat=repeats, number=n_tests)
-        x.append(i)
+        x.append(len(i))
         y.append(np.mean(t))
         y_err.append(np.std(t) / np.sqrt(len(t)))
     pyplot.errorbar(x, y, yerr=y_err, fmt='-o', label=func.__name__)
@@ -33,21 +33,32 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name_prefix=""):
 
 
 if __name__ == "__main__":
-    def external(input_size):
-        print("External Sort: " + str(input_size))
-        external_merge_sort.with_random_numbers(input_size, chunk_size=10000, input_range=(0, 1000000))
+    input_1 = generate_input.to_memory(5, (0, 10))
+    input_2 = generate_input.to_memory(6, (0, 10))
+    input_3 = generate_input.to_memory(7, (0, 10))
+
+    def external_in_memory_input(input_list):
+        print("External Sort: " + str(len(input_list)))
+        external_merge_sort.list_sort(input_list=input_list, chunk_size=100000)
 
 
-    def in_memory(input_size):
-        print("Merge Sort: " + str(input_size))
-        in_memory_merge_sort.with_random_numbers(input_size, input_range=(0, 1000000))
+    def external_file_input(input_size, chunk_size, input_range):
+        print("External Sort (File Input): " + str(input_size))
+        external_merge_sort.generate_and_sort(input_size=input_size, chunk_size=chunk_size, input_range=input_range)
 
 
-    def python_sort(input_size):
-        print("Python Sort: " + str(input_size))
-        input = generate_input.to_memory(input_size, input_range=(0, 1000000))
-        input.sort()
+    def in_memory_merge(input_list):
+        print("Merge Sort: " + str(len(input_list)))
+        in_memory_merge_sort.list_sort(input_list=input_list)
 
 
-    plot_times([python_sort, external, in_memory], [1024, 16384, 131072, 262144, 524288, 1048576, 2097152,
-                                                    4194304, 8388608], repeats=3, n_tests=1, file_name_prefix="output-")
+    def in_memory_tim(input_list):
+        print("Python Sort: " + str(len(input_list)))
+        sorted(input_list)
+
+    plot_times([external_in_memory_input, in_memory_merge, in_memory_tim],
+               [generate_input.to_memory(input_size=524288, input_range=(0, 1000000)),
+                generate_input.to_memory(input_size=1048576, input_range=(0, 1000000)),
+                generate_input.to_memory(input_size=2097152, input_range=(0, 1000000)),
+                generate_input.to_memory(input_size=4194304, input_range=(0, 1000000))],
+               repeats=2, n_tests=1, file_name_prefix="output-")
