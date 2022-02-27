@@ -34,9 +34,9 @@ def plot_times(functions, inputs, repeats=3, n_tests=1, file_name_prefix=""):
 
 if __name__ == "__main__":
 
-    def generate(input_size, input_range, input_file_name):
-        file_util.to_file(input_size, input_range, input_file_name)
-        return input_file_name, input_size
+    def generate(input_size, input_range, file_name):
+        file_util.to_file(input_size, input_range, file_name)
+        return file_name, input_size
 
 
     def external_merge(inputs):
@@ -52,13 +52,13 @@ if __name__ == "__main__":
     def in_memory_tim(inputs):
         print("Python Sort: " + str(inputs[1]))
         input = file_util.from_file(inputs[0])
-        print(input)
         sorted(input)
 
     upper_limit = 1000000
     plot_times([in_memory_tim, external_merge, in_memory_merge],
-               [generate(1048576, (0, upper_limit), "input-1.csv"),
-                generate(2097152, (0, upper_limit), "input-2.csv"),
-                generate(8388608, (0, upper_limit), "input-3.csv"),
-                generate(16777216, (0, upper_limit), "input-4.csv")],
+               [generate(input_size=262144, input_range=(0, upper_limit), file_name="input-0.csv"),
+                generate(input_size=1048576, input_range=(0, upper_limit), file_name="input-1.csv"),
+                generate(input_size=2097152, input_range=(0, upper_limit), file_name="input-2.csv"),
+                generate(input_size=8388608, input_range=(0, upper_limit), file_name="input-3.csv"),
+                generate(input_size=16777216, input_range=(0, upper_limit), file_name="input-4.csv")],
                repeats=1, n_tests=1, file_name_prefix="output-")
