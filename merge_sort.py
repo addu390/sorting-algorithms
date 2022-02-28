@@ -38,10 +38,10 @@ def _random(input_size, input_range):
     ms.sort(input)
 
 
-def sort_from_file(file_name, input_size):
-    input = file_util.from_file(file_name)
+def sort_from_file(input_size, input_file_name, output_file_name):
+    input = file_util.from_file(input_file_name)
     ms = MergeSort()
-    ms.sort(input)
+    file_util.list_to_file(ms.sort(input), output_file_name)
 
 
 if __name__ == "__main__":

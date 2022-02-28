@@ -17,6 +17,13 @@ def to_file(input_size, input_range, file_name):
     return input_size
 
 
+def list_to_file(input_list, file_name):
+    with open(file_name, 'w') as file_writer:
+        for i in input_list:
+            file_writer.write(str(i) + "\n")
+        file_writer.close()
+
+
 def from_file(file_name):
     input_list = []
     with open(file_name, 'rb') as file_reader:
