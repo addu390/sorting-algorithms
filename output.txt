@@ -1,0 +1,5 @@
+Q1. Summarize the experiment performed by following the procedure in the instructions of Lab 3
+and show your work by including the output comparison graphs for different inputs
+(Input Size, Chunk size, and Input number(s) range).
+
+A1:

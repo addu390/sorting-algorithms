@@ -39,23 +39,32 @@ if __name__ == "__main__":
         return input_size, input_file, output_file
 
 
-    def external_merge(inputs):
-        print("External Sort: " + str(inputs[0]))
+    def external_merge_sort(inputs):
+        print('External Sort; START; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
         external_sort.sort_from_file(inputs[0], inputs[1], inputs[2], chunk_size=100000)
+        print('External Sort, COMPLETE; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
 
 
-    def in_memory_merge(inputs):
-        print("Merge Sort: " + str(inputs[0]))
+    def in_memory_merge_sort(inputs):
+        print('In Memory Merge Sort; START; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
         merge_sort.sort_from_file(inputs[0], inputs[1], inputs[2])
+        print('In Memory Merge Sort; COMPLETE; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
 
 
-    def in_memory_tim(inputs):
-        print("Python Sort: " + str(inputs[0]))
+    def in_memory_tim_sort(inputs):
+        print('In Memory Tim Sort; START; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
         input = file_util.from_file(inputs[1])
         file_util.list_to_file(sorted(input), inputs[2])
+        print('In Memory Tim Sort; COMPLETE; Input Size: {0}, Input File: {1}, Output File {2}'
+              .format(inputs[0], inputs[1], inputs[2]))
 
     upper_limit = 1000000
-    plot_times([in_memory_tim, external_merge, in_memory_merge],
+    plot_times([in_memory_tim_sort, external_merge_sort, in_memory_merge_sort],
                [generate(input_size=262144, input_range=(0, upper_limit), input_file="input-0.csv", output_file="output-0.csv"),
                 generate(input_size=1048576, input_range=(0, upper_limit), input_file="input-1.csv", output_file="output-1.csv"),
                 generate(input_size=2097152, input_range=(0, upper_limit), input_file="input-2.csv", output_file="output-2.csv"),

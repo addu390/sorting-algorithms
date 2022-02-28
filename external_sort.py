@@ -48,6 +48,7 @@ class ExternalMergeSort:
             self.heapify(heap, min_element, n)
 
     def merge_chunks(self, output_file_name):
+        print('External Sort; MERGE PHASE; Output File: {0}'.format(output_file_name))
         heap = []
         with open(output_file_name, 'w') as file_writer:
             for chunk_file in self.chunk_files:
@@ -72,6 +73,7 @@ class ExternalMergeSort:
         file_writer.close()
 
     def split(self, file_name, chunk_size):
+        print('External Sort; SPLIT PHASE; Chunk Size: {0}, Input File: {1}'.format(chunk_size, file_name))
         with open(file_name, 'rb') as file_reader:
             size = 0
             sorted_chunk = []
